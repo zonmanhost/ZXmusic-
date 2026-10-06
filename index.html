@@ -378,6 +378,12 @@ body {
     transition: .25s;
 }
 
+.banner-switcher-title{font-weight:900;font-size:11px;letter-spacing:.08em;margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+.banner-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;}
+.banner-grid .banner-btn{min-width:0;width:100%;padding:7px 4px;font-size:11px;font-weight:900;}
+@media (max-width:520px){.banner-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}.banner-grid .banner-btn{padding:6px 2px;font-size:10px;}}
+
+
 .banner-btn:hover,
 .banner-btn.active {
     color: #fff;
@@ -1421,22 +1427,274 @@ html.lite-mode .hero-video {
 }
 
 </style>
+
+<style id="neo-brutalist-performance-theme">
+/* =========================================================
+   ZXmusic — NEO-BRUTALIST / RETRO TECH LITE
+   Performance-first: no backdrop blur, no animated blobs,
+   minimal shadows, minimal transitions.
+========================================================= */
+:root{
+  --accent:#ff4db8;
+  --accent-2:#18d9e8;
+  --neo-yellow:#ffe34f;
+  --neo-pink:#f05aa9;
+  --neo-cyan:#2ed3e6;
+  --neo-black:#0b0b0b;
+  --neo-white:#fffdf7;
+  --neo-gray:#e9e9e9;
+  --neo-border:#050505;
+  --neo-shadow:6px 6px 0 #050505;
+  --neo-shadow-sm:4px 4px 0 #050505;
+  --text:#0a0a0a;
+  --muted:#343434;
+  --radius:10px;
+}
+
+html{scroll-behavior:auto;}
+body{
+  background:var(--neo-yellow)!important;
+  color:var(--text)!important;
+  font-family:Arial,Helvetica,sans-serif!important;
+  padding-bottom:calc(118px + env(safe-area-inset-bottom))!important;
+}
+
+/* Kill expensive Liquid Glass effects */
+.ambient{display:none!important;}
+.glass{
+  background:var(--neo-white)!important;
+  border:3px solid var(--neo-border)!important;
+  border-radius:var(--radius)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  box-shadow:var(--neo-shadow)!important;
+}
+
+.app{width:min(100%,900px);padding:16px!important;}
+
+/* HEADER */
+.topbar{
+  background:var(--neo-pink)!important;
+  padding:12px 14px!important;
+  margin-bottom:18px!important;
+  position:relative!important;
+  top:auto!important;
+  border-radius:8px!important;
+  box-shadow:var(--neo-shadow)!important;
+}
+.brand{gap:10px!important;}
+.brand-icon{
+  width:44px!important;height:44px!important;
+  border:3px solid var(--neo-border)!important;
+  border-radius:7px!important;
+  background:var(--neo-cyan)!important;
+  color:#000!important;
+  box-shadow:3px 3px 0 #000!important;
+}
+.brand-text strong{font-family:Impact,"Arial Black",Arial,sans-serif!important;font-size:16px!important;letter-spacing:.2px;}
+.brand-text span{color:#111!important;font-weight:700!important;}
+.header-action{
+  border:3px solid #000!important;background:#fff!important;color:#000!important;
+  border-radius:7px!important;box-shadow:3px 3px 0 #000!important;
+}
+
+/* HERO / VIDEO BANNER */
+.hero{
+  background:#fff!important;
+  border:3px solid #000!important;
+  padding:0!important;
+  overflow:hidden!important;
+  box-shadow:var(--neo-shadow)!important;
+}
+.banner-media{
+  position:relative!important;
+  width:100%!important;
+  height:220px!important;
+  background:#111!important;
+  border-bottom:3px solid #000!important;
+  overflow:hidden!important;
+}
+.banner-media .hero-video,
+.hero-video{
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  opacity:1!important;
+  filter:none!important;
+  transform:none!important;
+}
+.hero-video-overlay{
+  background:linear-gradient(to bottom,rgba(0,0,0,.02),rgba(0,0,0,.32))!important;
+}
+.banner-switcher{
+  top:12px!important;right:12px!important;
+  padding:4px!important;
+  background:#fff!important;
+  border:3px solid #000!important;
+  border-radius:7px!important;
+  box-shadow:3px 3px 0 #000!important;
+  backdrop-filter:none!important;
+}
+.banner-btn{
+  border:2px solid #000!important;
+  border-radius:4px!important;
+  background:#fff!important;color:#000!important;
+  font-weight:900!important;
+  transition:none!important;
+}
+.banner-btn.active{background:var(--neo-cyan)!important;color:#000!important;}
+.banner-label{
+  left:12px!important;bottom:12px!important;
+  background:#fff!important;color:#000!important;
+  border:3px solid #000!important;border-radius:4px!important;
+  box-shadow:3px 3px 0 #000!important;
+  font-weight:900!important;
+}
+.banner-fallback{
+  background:#fff!important;color:#000!important;
+  border:3px solid #000!important;
+  box-shadow:4px 4px 0 #000!important;
+}
+.hero-content{
+  padding:22px 20px 24px!important;
+  background:#fff!important;
+}
+.hero-badge{
+  display:inline-flex!important;
+  background:#000!important;color:#fff!important;
+  border:3px solid #000!important;border-radius:4px!important;
+  padding:7px 10px!important;font-weight:900!important;
+}
+.live-dot{background:#38e66f!important;box-shadow:none!important;}
+.hero h1{
+  font-family:Impact,"Arial Black",Arial,sans-serif!important;
+  font-size:clamp(48px,12vw,88px)!important;
+  line-height:.9!important;
+  letter-spacing:-1px!important;
+  color:#000!important;
+  margin:18px 0!important;
+  text-shadow:3px 3px 0 var(--neo-cyan)!important;
+}
+.hero h1 .gradient,.gradient{
+  color:var(--neo-pink)!important;
+  background:none!important;
+  -webkit-text-fill-color:initial!important;
+}
+.hero p{color:#222!important;font-weight:700!important;max-width:700px;}
+
+/* SEARCH */
+.search-card{
+  display:flex!important;gap:10px!important;
+  margin-top:22px!important;padding:10px!important;
+  background:#fff!important;border:3px solid #000!important;
+  border-radius:8px!important;box-shadow:var(--neo-shadow)!important;
+}
+.search-input{
+  background:#f4f4f4!important;color:#000!important;
+  border:3px solid #000!important;border-radius:5px!important;
+  font-weight:700!important;
+}
+.search-input::placeholder{color:#555!important;}
+.search-button{
+  min-width:64px!important;
+  background:var(--neo-cyan)!important;color:#000!important;
+  border:3px solid #000!important;border-radius:5px!important;
+  box-shadow:3px 3px 0 #000!important;
+  transition:none!important;
+}
+.search-button:active{transform:translate(3px,3px)!important;box-shadow:none!important;}
+
+/* SECTION HEAD */
+.section-head{margin-top:28px!important;}
+.section-head h2{
+  font-family:"Arial Black",Arial,sans-serif!important;
+  color:#000!important;font-weight:900!important;
+  text-transform:uppercase!important;
+}
+.section-head span{color:#111!important;font-weight:900!important;}
+
+/* RESULT + HISTORY CARDS */
+.results,.history-list{contain:content!important;}
+.empty,.history-empty,.history-card{
+  background:#fff!important;color:#000!important;
+  border:3px solid #000!important;border-radius:8px!important;
+  box-shadow:var(--neo-shadow-sm)!important;
+}
+.result-card{
+  background:#fff!important;color:#000!important;
+  border:3px solid #000!important;border-radius:8px!important;
+  box-shadow:var(--neo-shadow-sm)!important;
+}
+.result-card:hover,.history-card:hover{transform:none!important;}
+.history-section{margin-top:28px!important;}
+.history-clear{
+  background:var(--neo-pink)!important;color:#000!important;
+  border:3px solid #000!important;border-radius:4px!important;
+  box-shadow:3px 3px 0 #000!important;font-weight:900!important;
+}
+.history-thumb{border:2px solid #000!important;border-radius:4px!important;}
+.history-title,.history-meta{color:#000!important;}
+.history-play{
+  background:var(--neo-cyan)!important;color:#000!important;
+  border:3px solid #000!important;border-radius:5px!important;
+  box-shadow:3px 3px 0 #000!important;
+}
+
+/* PLAYER */
+.player{
+  background:var(--neo-white)!important;color:#000!important;
+  border:3px solid #000!important;border-radius:8px!important;
+  box-shadow:var(--neo-shadow)!important;
+}
+.player-cover{border:3px solid #000!important;border-radius:5px!important;}
+.player-info strong,.player-info span{color:#000!important;}
+.player-button{
+  background:#fff!important;color:#000!important;
+  border:3px solid #000!important;border-radius:5px!important;
+  box-shadow:3px 3px 0 #000!important;
+}
+.player-button.main{background:var(--neo-pink)!important;color:#000!important;}
+.progress,.volume{accent-color:#000!important;}
+
+/* BOTTOM NAV */
+.bottom-nav{
+  background:#fff!important;
+  border:3px solid #000!important;
+  border-radius:8px!important;
+  box-shadow:var(--neo-shadow)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+.nav-indicator{background:var(--neo-cyan)!important;border:3px solid #000!important;box-shadow:3px 3px 0 #000!important;}
+.nav-button{color:#000!important;z-index:2!important;}
+.nav-button i,.nav-button span{color:#000!important;}
+.nav-button.active{color:#000!important;}
+.nav-button.active i{color:#000!important;}
+
+/* MOBILE PERFORMANCE */
+@media (max-width:600px){
+  .app{padding:12px!important;}
+  .banner-media{height:190px!important;}
+  .hero-content{padding:18px 16px 22px!important;}
+  .hero h1{font-size:58px!important;}
+  .glass{box-shadow:4px 4px 0 #050505!important;}
+  .topbar{box-shadow:4px 4px 0 #050505!important;}
+  .search-card{box-shadow:4px 4px 0 #050505!important;}
+  .player{box-shadow:4px 4px 0 #050505!important;}
+  .bottom-nav{box-shadow:4px 4px 0 #050505!important;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}
+}
+</style>
+
 </head>
 
 <body>
-
-<!-- =========================
-     AMBIENT
-========================= -->
-
-<div class="ambient">
-
-    <div class="blob one"></div>
-    <div class="blob two"></div>
-    <div class="blob three"></div>
-
-</div>
-
 
 <div id="toast" class="toast"></div>
 
@@ -1492,29 +1750,40 @@ html.lite-mode .hero-video {
                 preload="metadata"
                 disablepictureinpicture
                 controlslist="nodownload noplaybackrate noremoteplayback">
-                <source id="heroVideoSource" src="gfx1.mp4" type="video/mp4">
+                <source id="heroVideoSource" src="Banner/gfx1.mp4" type="video/mp4">
             </video>
 
             <div class="hero-video-overlay"></div>
 
-            <div class="banner-switcher" aria-label="Pilih banner">
-                <button class="banner-btn active" data-banner="0" type="button">select 1</button>
-                <button class="banner-btn" data-banner="1" type="button">select 2</button>
+            <div class="banner-switcher" aria-label="Pilih banner video">
+                <div class="banner-switcher-title"><i class="fa-solid fa-film"></i> PILIH VIDEO BANNER</div>
+                <div class="banner-grid" id="bannerGrid">
+                    <button class="banner-btn active" data-banner="0" type="button">01</button>
+                    <button class="banner-btn" data-banner="1" type="button">02</button>
+                    <button class="banner-btn" data-banner="2" type="button">03</button>
+                    <button class="banner-btn" data-banner="3" type="button">04</button>
+                    <button class="banner-btn" data-banner="4" type="button">05</button>
+                    <button class="banner-btn" data-banner="5" type="button">06</button>
+                    <button class="banner-btn" data-banner="6" type="button">07</button>
+                    <button class="banner-btn" data-banner="7" type="button">08</button>
+                    <button class="banner-btn" data-banner="8" type="button">09</button>
+                    <button class="banner-btn" data-banner="9" type="button">10</button>
+                </div>
             </div>
 
-            <div class="banner-label" id="bannerLabel">zonXiterHub Music</div>
+            <div class="banner-label" id="bannerLabel">@zonXiter 1</div>
 
             <div class="banner-fallback" id="bannerFallback">
                 <i class="fa-solid fa-film"></i>
                 <strong>Banner video belum tampil</strong>
-                <span>Pastikan gfx1.mp4 dan gfx2.mp4 tersedia di folder yang sama dengan index.html.</span>
+                <span>Pastikan folder <b>Banner</b> berisi gfx1.mp4 sampai gfx10.mp4.</span>
             </div>
         </div>
 
         <div class="hero-content">
             <div class="hero-badge">
                 <span class="live-dot"></span>
-                ZXmusic • DIGITAL
+                ZXmusic • DIGITAL PLAYER
             </div>
 
             <h1>
@@ -1524,8 +1793,8 @@ html.lite-mode .hero-video {
             </h1>
 
             <p>
-                Cari lagu favorit melalui ZXmusic,
-                Nikmati music apapun melalui website ZXmusic dengan praktis.
+                Cari lagu favorit melalui ZXmusic dengan tampilan baru,
+                banner anime bergerak, dan koleksi riwayat musik yang tersimpan otomatis.
             </p>
         </div>
 
@@ -2065,26 +2334,25 @@ function showToast(message) {
 
 
 /* =========================
+   BANNER SWITCHER — Banner/gfx1.mp4 ... Banner/gfx10.mp4
+========================= */
+
+/* =========================
    BANNER SWITCHER
 ========================= */
 
-const BANNERS = [
-    {
-        url: "gfx1.mp4",
-        label: "ANIME MOTION • BANNER 1"
-    },
-    {
-        url: "gfx2.mp4",
-        label: "ANIME MOTION • BANNER 2"
-    }
-];
+const BANNERS = Array.from({length: 10}, (_, i) => ({
+    url: `Banner/gfx${i + 1}.mp4`,
+    label: `@zonXiter ${i + 1}`
+}));
 
 function setBanner(index) {
-    bannerIndex = index === 1 ? 1 : 0;
+    const safeIndex = Math.max(0, Math.min(BANNERS.length - 1, Number(index) || 0));
+    bannerIndex = safeIndex;
 
     const banner = BANNERS[bannerIndex];
 
-    // Source video langsung dari nama file di folder yang sama.
+    // Source video langsung dari folder Banner/.
     if (bannerSource) {
         bannerSource.src = banner.url;
     }
@@ -3251,7 +3519,7 @@ function cycleTheme() {
 
 
     showToast(
-        "Tema Liquid Glass diubah ✨"
+        "Tema icon di ubah ✨"
     );
 
 }
@@ -3306,8 +3574,8 @@ document.addEventListener(
 const savedBanner =
     Number(localStorage.getItem("zxmusic_banner_index"));
 
-if (savedBanner === 1) {
-    setBanner(1);
+if (Number.isInteger(savedBanner) && savedBanner >= 0 && savedBanner < BANNERS.length) {
+    setBanner(savedBanner);
 } else {
     setBanner(0);
 }
@@ -3324,7 +3592,7 @@ moveNavIndicator(0);
 updateVolumeIcon();
 
 console.log(
-    "zonXiterHub Music Digital • ."
+    "zonXiter Music + History initialized."
 );
 
 </script>
