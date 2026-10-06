@@ -1498,7 +1498,7 @@ body{
   border-radius:7px!important;box-shadow:3px 3px 0 #000!important;
 }
 
-/* HERO / VIDEO BANNER */
+/* HERO / VIDEO banner */
 .hero{
   background:#fff!important;
   border:3px solid #000!important;
@@ -1736,7 +1736,7 @@ body{
          HERO
     ========================== -->
 
-    <section class="hero glass" aria-label="ZXmusic Banner">
+    <section class="hero glass" aria-label="ZXmusic banner">
 
         <div class="banner-media">
             <video
@@ -1750,13 +1750,13 @@ body{
                 preload="metadata"
                 disablepictureinpicture
                 controlslist="nodownload noplaybackrate noremoteplayback">
-                <source id="heroVideoSource" src="Banner/gfx1.mp4" type="video/mp4">
+                <source id="heroVideoSource" src="banner/gfx1.mp4" type="video/mp4">
             </video>
 
             <div class="hero-video-overlay"></div>
 
             <div class="banner-switcher" aria-label="Pilih banner video">
-                <div class="banner-switcher-title"><i class="fa-solid fa-film"></i> PILIH VIDEO BANNER</div>
+                <div class="banner-switcher-title"><i class="fa-solid fa-film"></i> PILIH VIDEO banner</div>
                 <div class="banner-grid" id="bannerGrid">
                     <button class="banner-btn active" data-banner="0" type="button">01</button>
                     <button class="banner-btn" data-banner="1" type="button">02</button>
@@ -1775,8 +1775,8 @@ body{
 
             <div class="banner-fallback" id="bannerFallback">
                 <i class="fa-solid fa-film"></i>
-                <strong>Banner video belum tampil</strong>
-                <span>Pastikan folder <b>Banner</b> berisi gfx1.mp4 sampai gfx10.mp4.</span>
+                <strong>banner video belum tampil</strong>
+                <span>Pastikan folder <b>banner</b> berisi gfx1.mp4 sampai gfx10.mp4.</span>
             </div>
         </div>
 
@@ -1794,7 +1794,7 @@ body{
 
             <p>
                 Cari lagu favorit melalui ZXmusic dengan tampilan baru,
-                banner anime bergerak, dan koleksi riwayat musik yang tersimpan otomatis.
+                 koleksi riwayat musik yang tersimpan otomatis.
             </p>
         </div>
 
@@ -2179,9 +2179,9 @@ const heroVideo =
     document.getElementById("heroVideo");
 
 // =========================
-// AUTO-PLAY VIDEO BANNER
+// AUTO-PLAY VIDEO banner
 // =========================
-// Banner pertama harus langsung dicoba saat halaman dibuka.
+// banner pertama harus langsung dicoba saat halaman dibuka.
 // Video dibuat muted agar sesuai dengan aturan autoplay browser/WebView.
 heroVideo.muted = true;
 heroVideo.defaultMuted = true;
@@ -2193,7 +2193,7 @@ heroVideo.setAttribute("webkit-playsinline", "");
 
 const bannerSource = document.getElementById("heroVideoSource");
 
-function tryPlayBanner() {
+function tryPlaybanner() {
     if (!heroVideo) return;
 
     heroVideo.muted = true;
@@ -2205,7 +2205,7 @@ function tryPlayBanner() {
     if (result && typeof result.catch === "function") {
         result.catch(() => {
             // WebView tertentu menolak autoplay pada percobaan pertama.
-            // Retry otomatis tanpa membutuhkan tombol BANNER.
+            // Retry otomatis tanpa membutuhkan tombol banner.
             setTimeout(() => {
                 heroVideo.muted = true;
                 heroVideo.play().catch(() => {});
@@ -2214,36 +2214,36 @@ function tryPlayBanner() {
     }
 }
 
-function loadInitialBanner() {
-    const firstBanner = "gfx1.mp4";
+function loadInitialbanner() {
+    const firstbanner = "gfx1.mp4";
 
     heroVideo.pause();
 
     if (bannerSource) {
-        bannerSource.src = firstBanner;
+        bannerSource.src = firstbanner;
     }
 
-    heroVideo.src = firstBanner;
+    heroVideo.src = firstbanner;
     heroVideo.load();
 
     // Beberapa Android WebView baru mengizinkan play setelah metadata/canplay.
-    tryPlayBanner();
-    setTimeout(tryPlayBanner, 100);
-    setTimeout(tryPlayBanner, 500);
-    setTimeout(tryPlayBanner, 1200);
+    tryPlaybanner();
+    setTimeout(tryPlaybanner, 100);
+    setTimeout(tryPlaybanner, 500);
+    setTimeout(tryPlaybanner, 1200);
 }
 
-heroVideo.addEventListener("loadedmetadata", tryPlayBanner);
-heroVideo.addEventListener("loadeddata", tryPlayBanner);
-heroVideo.addEventListener("canplay", tryPlayBanner);
-heroVideo.addEventListener("canplaythrough", tryPlayBanner);
+heroVideo.addEventListener("loadedmetadata", tryPlaybanner);
+heroVideo.addEventListener("loadeddata", tryPlaybanner);
+heroVideo.addEventListener("canplay", tryPlaybanner);
+heroVideo.addEventListener("canplaythrough", tryPlaybanner);
 
-document.addEventListener("DOMContentLoaded", loadInitialBanner, { once: true });
-window.addEventListener("load", loadInitialBanner, { once: true });
-window.addEventListener("pageshow", tryPlayBanner);
+document.addEventListener("DOMContentLoaded", loadInitialbanner, { once: true });
+window.addEventListener("load", loadInitialbanner, { once: true });
+window.addEventListener("pageshow", tryPlaybanner);
 
 document.addEventListener("visibilitychange", () => {
-    if (!document.hidden) tryPlayBanner();
+    if (!document.hidden) tryPlaybanner();
 });
 
 // Jika video terlihat kembali setelah scroll/tab, coba putar lagi.
@@ -2253,7 +2253,7 @@ if ("IntersectionObserver" in window) {
         if (!entry) return;
 
         if (entry.isIntersecting) {
-            tryPlayBanner();
+            tryPlaybanner();
         } else {
             // Saat banner tidak terlihat, hentikan decoding video agar scroll lebih ringan.
             heroVideo.pause();
@@ -2334,25 +2334,25 @@ function showToast(message) {
 
 
 /* =========================
-   BANNER SWITCHER — Banner/gfx1.mp4 ... Banner/gfx10.mp4
+   banner SWITCHER — banner/gfx1.mp4 ... banner/gfx10.mp4
 ========================= */
 
 /* =========================
-   BANNER SWITCHER
+   banner SWITCHER
 ========================= */
 
-const BANNERS = Array.from({length: 10}, (_, i) => ({
-    url: `Banner/gfx${i + 1}.mp4`,
+const bannerS = Array.from({length: 10}, (_, i) => ({
+    url: `banner/gfx${i + 1}.mp4`,
     label: `@zonXiter ${i + 1}`
 }));
 
-function setBanner(index) {
-    const safeIndex = Math.max(0, Math.min(BANNERS.length - 1, Number(index) || 0));
+function setbanner(index) {
+    const safeIndex = Math.max(0, Math.min(bannerS.length - 1, Number(index) || 0));
     bannerIndex = safeIndex;
 
-    const banner = BANNERS[bannerIndex];
+    const banner = bannerS[bannerIndex];
 
-    // Source video langsung dari folder Banner/.
+    // Source video langsung dari folder banner/.
     if (bannerSource) {
         bannerSource.src = banner.url;
     }
@@ -2363,9 +2363,9 @@ function setBanner(index) {
     heroVideo.load();
 
     // Switch banner juga langsung mencoba autoplay tanpa klik tambahan.
-    tryPlayBanner();
-    setTimeout(tryPlayBanner, 100);
-    setTimeout(tryPlayBanner, 500);
+    tryPlaybanner();
+    setTimeout(tryPlaybanner, 100);
+    setTimeout(tryPlaybanner, 500);
 
     bannerLabel.textContent = banner.label;
 
@@ -2384,7 +2384,7 @@ function setBanner(index) {
 
 bannerButtons.forEach(button => {
     button.addEventListener("click", () => {
-        setBanner(Number(button.dataset.banner));
+        setbanner(Number(button.dataset.banner));
     });
 });
 
@@ -3571,19 +3571,19 @@ document.addEventListener(
    INITIALIZE
 ========================= */
 
-const savedBanner =
+const savedbanner =
     Number(localStorage.getItem("zxmusic_banner_index"));
 
-if (Number.isInteger(savedBanner) && savedBanner >= 0 && savedBanner < BANNERS.length) {
-    setBanner(savedBanner);
+if (Number.isInteger(savedbanner) && savedbanner >= 0 && savedbanner < bannerS.length) {
+    setbanner(savedbanner);
 } else {
-    setBanner(0);
+    setbanner(0);
 }
 
 // Jangan menunggu tombol banner: langsung jalankan banner tersimpan/default.
-setTimeout(tryPlayBanner, 50);
-setTimeout(tryPlayBanner, 300);
-setTimeout(tryPlayBanner, 1000);
+setTimeout(tryPlaybanner, 50);
+setTimeout(tryPlaybanner, 300);
+setTimeout(tryPlaybanner, 1000);
 
 renderHistory();
 
