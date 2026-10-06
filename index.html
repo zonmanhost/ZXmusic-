@@ -1,0 +1,3601 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>ZXmusic Digital</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+
+:root {
+    --accent: #a855f7;
+    --accent-2: #6366f1;
+    --accent-rgb: 168, 85, 247;
+
+    --bg: #07070b;
+    --glass: rgba(255,255,255,.075);
+    --glass-hover: rgba(255,255,255,.11);
+    --border: rgba(255,255,255,.12);
+
+    --text: #ffffff;
+    --muted: rgba(255,255,255,.52);
+
+    --blur: 25px;
+    --radius: 26px;
+}
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100dvh;
+    color: var(--text);
+    background:
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(var(--accent-rgb), .22),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 70%,
+            rgba(59,130,246,.14),
+            transparent 30%
+        ),
+        var(--bg);
+
+    font-family: "Inter", sans-serif;
+    overflow-x: hidden;
+
+    padding-bottom:
+        calc(125px + env(safe-area-inset-bottom));
+}
+
+/* =========================
+   AMBIENT LIQUID BACKGROUND
+========================= */
+
+.ambient {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(85px);
+    opacity: .25;
+    animation: liquidFloat 12s ease-in-out infinite alternate;
+}
+
+.blob.one {
+    width: 330px;
+    height: 330px;
+    background: var(--accent);
+    left: -120px;
+    top: 5%;
+}
+
+.blob.two {
+    width: 300px;
+    height: 300px;
+    background: #2563eb;
+    right: -120px;
+    top: 45%;
+    animation-delay: -4s;
+}
+
+.blob.three {
+    width: 260px;
+    height: 260px;
+    background: #ec4899;
+    left: 25%;
+    bottom: -100px;
+    animation-delay: -8s;
+}
+
+@keyframes liquidFloat {
+    0% {
+        transform: translate3d(0,0,0) scale(1);
+    }
+
+    50% {
+        transform: translate3d(50px,-40px,0) scale(1.15);
+    }
+
+    100% {
+        transform: translate3d(-30px,50px,0) scale(.95);
+    }
+}
+
+/* =========================
+   GLASS
+========================= */
+
+.glass {
+    background: var(--glass);
+    border: 1px solid var(--border);
+
+    backdrop-filter: blur(var(--blur)) saturate(140%);
+    -webkit-backdrop-filter: blur(var(--blur)) saturate(140%);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.08),
+        0 25px 80px rgba(0,0,0,.25);
+}
+
+/* =========================
+   APP
+========================= */
+
+.app {
+    width: min(100%, 900px);
+    margin: auto;
+    padding: 18px;
+}
+
+/* =========================
+   TOP HEADER
+========================= */
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 13px 16px;
+    border-radius: 22px;
+
+    margin-bottom: 18px;
+
+    position: sticky;
+    top: 12px;
+
+    z-index: 100;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.brand-icon {
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(var(--accent-rgb),.35),
+            rgba(255,255,255,.05)
+        );
+
+    border: 1px solid rgba(255,255,255,.13);
+
+    color: var(--accent);
+
+    box-shadow:
+        0 0 25px rgba(var(--accent-rgb),.2);
+}
+
+.brand-text strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.brand-text span {
+    display: block;
+    margin-top: 2px;
+
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.header-action {
+    width: 40px;
+    height: 40px;
+
+    border: 1px solid var(--border);
+    border-radius: 13px;
+
+    color: white;
+    background: rgba(255,255,255,.05);
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+.header-action:hover {
+    background: var(--glass-hover);
+    transform: translateY(-2px);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    padding: 0;
+    background: rgba(7,7,11,.20) !important;
+    min-height: 0;
+    border-radius: 32px;
+    margin-bottom: 18px;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.banner-media {
+    position: relative;
+    width: 100%;
+    height: clamp(210px, 48vw, 360px);
+    min-height: 210px;
+    overflow: hidden;
+    background: #090910;
+    border-bottom: 1px solid rgba(255,255,255,.10);
+}
+
+.banner-media .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banner-fallback {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 7px;
+    padding: 24px;
+    text-align: center;
+    background: rgba(7,7,11,.86);
+    color: white;
+}
+
+.banner-fallback i {
+    font-size: 30px;
+    color: var(--accent);
+}
+
+.banner-fallback strong { font-size: 14px; }
+.banner-fallback span { color: var(--muted); font-size: 10px; }
+
+.hero.banner-error .banner-fallback { display: flex; }
+
+.hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: .95;
+    filter: saturate(1.2) contrast(1.05) brightness(.9);
+    transition: opacity .35s ease, transform .7s ease;
+}
+
+.hero:hover .hero-video {
+    transform: scale(1.025);
+}
+
+.hero-video-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        linear-gradient(90deg, rgba(5,5,10,.16) 0%, rgba(5,5,10,.04) 52%, rgba(5,5,10,.00) 100%),
+        linear-gradient(0deg, rgba(5,5,10,.10), transparent 68%);
+}
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 230px;
+    height: 230px;
+
+    right: -90px;
+    top: -100px;
+
+    background: var(--accent);
+
+    filter: blur(90px);
+    opacity: .18;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 28px 22px 34px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.banner-switcher {
+    position: absolute;
+    right: 18px;
+    top: 18px;
+    z-index: 4;
+    display: flex;
+    gap: 6px;
+    padding: 5px;
+    border-radius: 15px;
+    background: rgba(0,0,0,.32);
+    border: 1px solid rgba(255,255,255,.16);
+    backdrop-filter: blur(14px);
+}
+
+.banner-btn {
+    border: 1px solid transparent;
+    min-width: 42px;
+    height: 32px;
+    padding: 0 10px;
+    border-radius: 10px;
+    color: rgba(255,255,255,.65);
+    background: transparent;
+    cursor: pointer;
+    font: 700 10px "Inter", sans-serif;
+    transition: .25s;
+}
+
+.banner-switcher-title{font-weight:900;font-size:11px;letter-spacing:.08em;margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+.banner-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;}
+.banner-grid .banner-btn{min-width:0;width:100%;padding:7px 4px;font-size:11px;font-weight:900;}
+@media (max-width:520px){.banner-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}.banner-grid .banner-btn{padding:6px 2px;font-size:10px;}}
+
+
+.banner-btn:hover,
+.banner-btn.active {
+    color: #fff;
+    background: rgba(255,255,255,.14);
+    border-color: rgba(255,255,255,.14);
+}
+
+.banner-label {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    z-index: 3;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: rgba(0,0,0,.32);
+    border: 1px solid rgba(255,255,255,.12);
+    color: rgba(255,255,255,.68);
+    font-size: 9px;
+    font-weight: 700;
+    backdrop-filter: blur(12px);
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 7px 12px;
+
+    border-radius: 999px;
+
+    background: rgba(255,255,255,.06);
+    border: 1px solid var(--border);
+
+    color: rgba(255,255,255,.65);
+
+    font-size: 10px;
+    font-weight: 700;
+
+    margin-bottom: 16px;
+}
+
+.live-dot {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    box-shadow:
+        0 0 12px #22c55e;
+}
+
+.hero h1 {
+    font-size: clamp(38px, 9vw, 72px);
+    line-height: .95;
+
+    letter-spacing: -4px;
+
+    margin-bottom: 16px;
+}
+
+.gradient {
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            var(--accent),
+            #60a5fa
+        );
+
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    max-width: 590px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-card {
+    padding: 10px;
+    border-radius: 22px;
+
+    display: flex;
+    gap: 8px;
+
+    margin-bottom: 20px;
+}
+
+.search-input {
+    width: 100%;
+
+    min-width: 0;
+
+    border: 0;
+    outline: 0;
+
+    color: white;
+
+    background: transparent;
+
+    padding: 0 13px;
+
+    font-size: 14px;
+}
+
+.search-input::placeholder {
+    color: rgba(255,255,255,.38);
+}
+
+.search-button {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    border: 0;
+    border-radius: 16px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--accent),
+            var(--accent-2)
+        );
+
+    box-shadow:
+        0 8px 25px rgba(var(--accent-rgb),.25);
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+.search-button:hover {
+    transform: translateY(-2px);
+}
+
+.search-button:active {
+    transform: scale(.94);
+}
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 12px;
+}
+
+.section-head h2 {
+    font-size: 17px;
+    letter-spacing: -.5px;
+}
+
+.section-head span {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+/* =========================
+   RESULTS
+========================= */
+
+.results {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    min-height: 100px;
+}
+
+.result {
+    padding: 10px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    border-radius: 20px;
+
+    cursor: pointer;
+
+    transition:
+        transform .25s,
+        background .25s,
+        border-color .25s;
+}
+
+.result:hover {
+    transform: translateY(-3px);
+    background: var(--glass-hover);
+    border-color: rgba(255,255,255,.2);
+}
+
+.result:active {
+    transform: scale(.985);
+}
+
+.thumb {
+    width: 62px;
+    height: 62px;
+
+    border-radius: 16px;
+
+    object-fit: cover;
+
+    flex-shrink: 0;
+
+    background: rgba(255,255,255,.05);
+}
+
+.result-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.result-title {
+    display: block;
+
+    color: white;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    margin-bottom: 5px;
+}
+
+.result-meta {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.result-play {
+    width: 39px;
+    height: 39px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 13px;
+
+    background: rgba(var(--accent-rgb),.12);
+
+    border: 1px solid rgba(var(--accent-rgb),.2);
+
+    color: var(--accent);
+
+    transition: .25s;
+}
+
+.result:hover .result-play {
+    background: var(--accent);
+    color: white;
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty {
+    min-height: 180px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    border-radius: 25px;
+
+    padding: 25px;
+}
+
+.empty-icon {
+    width: 58px;
+    height: 58px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,.05);
+
+    color: var(--accent);
+
+    font-size: 21px;
+
+    margin-bottom: 13px;
+}
+
+.empty strong {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.empty span {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+/* =========================
+   HISTORY / COLLECTION
+========================= */
+
+.history-section {
+    margin-top: 24px;
+    margin-bottom: 120px;
+}
+
+.history-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.history-clear {
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.05);
+    color: var(--muted);
+    border-radius: 10px;
+    padding: 6px 9px;
+    font: 700 9px "Inter", sans-serif;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.history-clear:hover {
+    color: #fff;
+    background: rgba(255,255,255,.1);
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.history-card {
+    padding: 9px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    border-radius: 18px;
+    transition: .25s;
+}
+
+.history-card:hover {
+    transform: translateY(-2px);
+    background: var(--glass-hover);
+}
+
+.history-thumb {
+    width: 52px;
+    height: 52px;
+    flex: 0 0 52px;
+    object-fit: cover;
+    border-radius: 14px;
+    background: rgba(255,255,255,.05);
+}
+
+.history-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.history-title {
+    display: block;
+    font-size: 12px;
+    font-weight: 800;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 4px;
+}
+
+.history-meta {
+    display: block;
+    color: var(--muted);
+    font-size: 9px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.history-play {
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 12px;
+    background: rgba(var(--accent-rgb),.14);
+    color: var(--accent);
+    cursor: pointer;
+    transition: .2s;
+}
+
+.history-play:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+.history-empty {
+    padding: 22px;
+    text-align: center;
+    border-radius: 20px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+/* =========================
+   PLAYER
+========================= */
+
+.player {
+    position: fixed;
+
+    left: 50%;
+    bottom:
+        calc(91px + env(safe-area-inset-bottom));
+
+    transform: translateX(-50%);
+
+    width: min(
+        calc(100% - 28px),
+        650px
+    );
+
+    padding: 12px;
+
+    border-radius: 25px;
+
+    z-index: 500;
+
+    transition: .3s;
+}
+
+.player-top {
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+}
+
+.player-cover {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 15px;
+
+    object-fit: cover;
+
+    flex-shrink: 0;
+
+    background: rgba(255,255,255,.06);
+}
+
+.player-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.player-info strong {
+    display: block;
+
+    font-size: 12px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player-info span {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    margin-top: 4px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.player-button {
+    width: 38px;
+    height: 38px;
+
+    border: 0;
+    border-radius: 13px;
+
+    background: rgba(255,255,255,.06);
+
+    color: white;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.player-button:hover {
+    background: rgba(255,255,255,.12);
+}
+
+.player-button.main {
+    background: var(--accent);
+
+    box-shadow:
+        0 0 22px rgba(var(--accent-rgb),.25);
+}
+
+.progress-wrap {
+    margin-top: 10px;
+}
+
+.progress {
+    width: 100%;
+    height: 4px;
+
+    appearance: none;
+
+    border-radius: 10px;
+
+    background: rgba(255,255,255,.1);
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+.progress::-webkit-slider-thumb {
+    appearance: none;
+
+    width: 12px;
+    height: 12px;
+
+    border-radius: 50%;
+
+    background: var(--accent);
+
+    box-shadow:
+        0 0 10px rgba(var(--accent-rgb),.5);
+}
+
+.time-row {
+    display: flex;
+    justify-content: space-between;
+
+    color: var(--muted);
+
+    font-size: 8px;
+
+    margin-top: 5px;
+}
+
+.volume-row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    margin-top: 7px;
+}
+
+.volume-row i {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.volume {
+    flex: 1;
+
+    height: 3px;
+
+    appearance: none;
+
+    background: rgba(255,255,255,.1);
+
+    border-radius: 10px;
+}
+
+.volume::-webkit-slider-thumb {
+    appearance: none;
+
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: white;
+}
+
+/* =========================
+   BOTTOM NAV
+========================= */
+
+.bottom-nav {
+    position: fixed;
+
+    left: 50%;
+
+    bottom:
+        max(13px, env(safe-area-inset-bottom));
+
+    transform: translateX(-50%);
+
+    width: min(
+        calc(100% - 28px),
+        460px
+    );
+
+    height: 64px;
+
+    padding: 6px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 4px;
+
+    z-index: 1000;
+
+    border-radius: 23px;
+
+    overflow: hidden;
+}
+
+.nav-indicator {
+    position: absolute;
+
+    left: 6px;
+    top: 6px;
+
+    width: calc(
+        (100% - 32px) / 5
+    );
+
+    height: 52px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(var(--accent-rgb),.23),
+            rgba(255,255,255,.05)
+        );
+
+    border: 1px solid rgba(var(--accent-rgb),.3);
+
+    box-shadow:
+        0 0 25px rgba(var(--accent-rgb),.16);
+
+    transition:
+        transform .45s
+        cubic-bezier(.22,1,.36,1);
+
+    pointer-events: none;
+}
+
+.nav-button {
+    position: relative;
+    z-index: 2;
+
+    border: 0;
+
+    border-radius: 18px;
+
+    background: transparent;
+
+    color: var(--muted);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+.nav-button i {
+    font-size: 15px;
+
+    transition: .3s;
+}
+
+.nav-button span {
+    font-size: 8px;
+
+    font-weight: 700;
+}
+
+.nav-button.active {
+    color: white;
+}
+
+.nav-button.active i {
+    color: var(--accent);
+
+    transform:
+        translateY(-1px)
+        scale(1.12);
+
+    filter:
+        drop-shadow(
+            0 0 7px var(--accent)
+        );
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast {
+    position: fixed;
+
+    left: 50%;
+    top: 18px;
+
+    transform:
+        translate(-50%,-20px)
+        scale(.96);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 5000;
+
+    padding: 11px 16px;
+
+    border-radius: 15px;
+
+    background:
+        rgba(10,10,15,.75);
+
+    border: 1px solid var(--border);
+
+    backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.35);
+
+    color: white;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    transition: .3s;
+}
+
+.toast.show {
+    opacity: 1;
+
+    transform:
+        translate(-50%,0)
+        scale(1);
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.loader {
+    display: inline-block;
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 50%;
+
+    border:
+        2px solid rgba(255,255,255,.15);
+
+    border-top-color: var(--accent);
+
+    animation:
+        spin .7s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media (min-width: 800px) {
+
+    .app {
+        padding-top: 25px;
+    }
+
+    .hero {
+        min-height: 380px;
+    }
+
+    .hero-content {
+        min-height: 380px;
+        padding: 55px;
+    }
+
+    .results {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .player {
+        bottom: 100px;
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 520px) {
+
+    .app {
+        padding: 12px;
+    }
+
+    .topbar {
+        top: 8px;
+    }
+
+    .hero {
+        min-height: 330px;
+    }
+
+    .hero-content {
+        min-height: 330px;
+        padding: 30px 20px;
+    }
+
+    .banner-switcher {
+        right: 12px;
+        top: 12px;
+    }
+
+    .hero h1 {
+        letter-spacing: -2.5px;
+    }
+
+    .player {
+        bottom:
+            calc(
+                86px +
+                env(safe-area-inset-bottom)
+            );
+    }
+
+    .player-cover {
+        width: 45px;
+        height: 45px;
+    }
+
+    .player-button {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+
+/* =========================
+   PERFORMANCE MODE
+   Dibuat khusus agar scroll Android/WebView tetap ringan.
+========================= */
+
+html {
+    scroll-behavior: auto;
+}
+
+/* Video tidak perlu CSS filter per-frame karena ini cukup berat di GPU. */
+.hero-video {
+    filter: none;
+    transition: none;
+}
+
+.hero:hover .hero-video {
+    transform: none;
+}
+
+/* Kurangi biaya shadow besar pada komponen yang sering bergerak saat scroll. */
+.glass {
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 10px 30px rgba(0,0,0,.18);
+}
+
+/* HP / WebView: matikan blur dan animasi ambient yang paling mahal. */
+@media (max-width: 700px) {
+    body {
+        background:
+            radial-gradient(circle at 15% 8%, rgba(var(--accent-rgb), .13), transparent 34%),
+            radial-gradient(circle at 90% 72%, rgba(59,130,246,.09), transparent 34%),
+            var(--bg);
+    }
+
+    .ambient {
+        display: none;
+    }
+
+    .glass,
+    .banner-switcher,
+    .banner-label,
+    .toast {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+
+    .glass {
+        background: rgba(25,24,32,.88);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.055), 0 8px 24px rgba(0,0,0,.16);
+    }
+
+    .topbar {
+        position: relative;
+        top: auto;
+    }
+
+    .hero::before {
+        display: none;
+    }
+
+    .hero-video {
+        filter: none !important;
+        transform: none !important;
+    }
+
+    .hero-video-overlay {
+        background: linear-gradient(0deg, rgba(5,5,10,.24), rgba(5,5,10,.02));
+    }
+
+    .banner-switcher,
+    .banner-label {
+        background: rgba(10,10,16,.72);
+    }
+
+    .banner-btn,
+    .search-button,
+    .header-action,
+    .player-button,
+    .nav-button {
+        transition: none;
+    }
+
+    .results,
+    .history-list {
+        contain: layout paint;
+    }
+
+    .result,
+    .history-item {
+        contain: content;
+    }
+
+    img {
+        content-visibility: auto;
+    }
+}
+
+/* Perangkat yang terdeteksi rendah daya: lebih ringan lagi. */
+html.lite-mode .ambient {
+    display: none;
+}
+
+html.lite-mode .glass,
+html.lite-mode .banner-switcher,
+html.lite-mode .banner-label,
+html.lite-mode .toast {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+html.lite-mode .glass {
+    background: rgba(25,24,32,.90);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 7px 20px rgba(0,0,0,.14);
+}
+
+html.lite-mode .hero-video {
+    filter: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+</style>
+
+<style id="neo-brutalist-performance-theme">
+/* =========================================================
+   ZXmusic — NEO-BRUTALIST / RETRO TECH LITE
+   Performance-first: no backdrop blur, no animated blobs,
+   minimal shadows, minimal transitions.
+========================================================= */
+:root{
+  --accent:#ff4db8;
+  --accent-2:#18d9e8;
+  --neo-yellow:#ffe34f;
+  --neo-pink:#f05aa9;
+  --neo-cyan:#2ed3e6;
+  --neo-black:#0b0b0b;
+  --neo-white:#fffdf7;
+  --neo-gray:#e9e9e9;
+  --neo-border:#050505;
+  --neo-shadow:6px 6px 0 #050505;
+  --neo-shadow-sm:4px 4px 0 #050505;
+  --text:#0a0a0a;
+  --muted:#343434;
+  --radius:10px;
+}
+
+html{scroll-behavior:auto;}
+body{
+  background:var(--neo-yellow)!important;
+  color:var(--text)!important;
+  font-family:Arial,Helvetica,sans-serif!important;
+  padding-bottom:calc(118px + env(safe-area-inset-bottom))!important;
+}
+
+/* Kill expensive Liquid Glass effects */
+.ambient{display:none!important;}
+.glass{
+  background:var(--neo-white)!important;
+  border:3px solid var(--neo-border)!important;
+  border-radius:var(--radius)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  box-shadow:var(--neo-shadow)!important;
+}
+
+.app{width:min(100%,900px);padding:16px!important;}
+
+/* HEADER */
+.topbar{
+  background:var(--neo-pink)!important;
+  padding:12px 14px!important;
+  margin-bottom:18px!important;
+  position:relative!important;
+  top:auto!important;
+  border-radius:8px!important;
+  box-shadow:var(--neo-shadow)!important;
+}
+.brand{gap:10px!important;}
+.brand-icon{
+  width:44px!important;height:44px!important;
+  border:3px solid var(--neo-border)!important;
+  border-radius:7px!important;
+  background:var(--neo-cyan)!important;
+  color:#000!important;
+  box-shadow:3px 3px 0 #000!important;
+}
+.brand-text strong{font-family:Impact,"Arial Black",Arial,sans-serif!important;font-size:16px!important;letter-spacing:.2px;}
+.brand-text span{color:#111!important;font-weight:700!important;}
+.header-action{
+  border:3px solid #000!important;background:#fff!important;color:#000!important;
+  border-radius:7px!important;box-shadow:3px 3px 0 #000!important;
+}
+
+/* HERO / VIDEO banner */
+.hero{
+  background:#fff!important;
+  border:3px solid #000!important;
+  padding:0!important;
+  overflow:hidden!important;
+  box-shadow:var(--neo-shadow)!important;
+}
+.banner-media{
+  position:relative!important;
+  width:100%!important;
+  height:220px!important;
+  background:#111!important;
+  border-bottom:3px solid #000!important;
+  overflow:hidden!important;
+}
+.banner-media .hero-video,
+.hero-video{
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  opacity:1!important;
+  filter:none!important;
+  transform:none!important;
+}
+.hero-video-overlay{
+  background:linear-gradient(to bottom,rgba(0,0,0,.02),rgba(0,0,0,.32))!important;
+}
+.banner-switcher{
+  top:12px!important;right:12px!important;
+  padding:4px!important;
+  background:#fff!important;
+  border:3px solid #000!important;
+  border-radius:7px!important;
+  box-shadow:3px 3px 0 #000!important;
+  backdrop-filter:none!important;
+}
+.banner-btn{
+  border:2px solid #000!important;
+  border-radius:4px!important;
+  background:#fff!important;color:#000!important;
+  font-weight:900!important;
+  transition:none!important;
+}
+.banner-btn.active{background:var(--neo-cyan)!important;color:#000!important;}
+.banner-label{
+  left:12px!important;bottom:12px!important;
+  background:#fff!important;color:#000!important;
+  border:3px solid #000!important;border-radius:4px!important;
+  box-shadow:3px 3px 0 #000!important;
+  font-weight:900!important;
+}
+.banner-fallback{
+  background:#fff!important;color:#000!important;
+  border:3px solid #000!important;
+  box-shadow:4px 4px 0 #000!important;
+}
+.hero-content{
+  padding:22px 20px 24px!important;
+  background:#fff!important;
+}
+.hero-badge{
+  display:inline-flex!important;
+  background:#000!important;color:#fff!important;
+  border:3px solid #000!important;border-radius:4px!important;
+  padding:7px 10px!important;font-weight:900!important;
+}
+.live-dot{background:#38e66f!important;box-shadow:none!important;}
+.hero h1{
+  font-family:Impact,"Arial Black",Arial,sans-serif!important;
+  font-size:clamp(48px,12vw,88px)!important;
+  line-height:.9!important;
+  letter-spacing:-1px!important;
+  color:#000!important;
+  margin:18px 0!important;
+  text-shadow:3px 3px 0 var(--neo-cyan)!important;
+}
+.hero h1 .gradient,.gradient{
+  color:var(--neo-pink)!important;
+  background:none!important;
+  -webkit-text-fill-color:initial!important;
+}
+.hero p{color:#222!important;font-weight:700!important;max-width:700px;}
+
+/* SEARCH */
+.search-card{
+  display:flex!important;gap:10px!important;
+  margin-top:22px!important;padding:10px!important;
+  background:#fff!important;border:3px solid #000!important;
+  border-radius:8px!important;box-shadow:var(--neo-shadow)!important;
+}
+.search-input{
+  background:#f4f4f4!important;color:#000!important;
+  border:3px solid #000!important;border-radius:5px!important;
+  font-weight:700!important;
+}
+.search-input::placeholder{color:#555!important;}
+.search-button{
+  min-width:64px!important;
+  background:var(--neo-cyan)!important;color:#000!important;
+  border:3px solid #000!important;border-radius:5px!important;
+  box-shadow:3px 3px 0 #000!important;
+  transition:none!important;
+}
+.search-button:active{transform:translate(3px,3px)!important;box-shadow:none!important;}
+
+/* SECTION HEAD */
+.section-head{margin-top:28px!important;}
+.section-head h2{
+  font-family:"Arial Black",Arial,sans-serif!important;
+  color:#000!important;font-weight:900!important;
+  text-transform:uppercase!important;
+}
+.section-head span{color:#111!important;font-weight:900!important;}
+
+/* RESULT + HISTORY CARDS */
+.results,.history-list{contain:content!important;}
+.empty,.history-empty,.history-card{
+  background:#fff!important;color:#000!important;
+  border:3px solid #000!important;border-radius:8px!important;
+  box-shadow:var(--neo-shadow-sm)!important;
+}
+.result-card{
+  background:#fff!important;color:#000!important;
+  border:3px solid #000!important;border-radius:8px!important;
+  box-shadow:var(--neo-shadow-sm)!important;
+}
+.result-card:hover,.history-card:hover{transform:none!important;}
+.history-section{margin-top:28px!important;}
+.history-clear{
+  background:var(--neo-pink)!important;color:#000!important;
+  border:3px solid #000!important;border-radius:4px!important;
+  box-shadow:3px 3px 0 #000!important;font-weight:900!important;
+}
+.history-thumb{border:2px solid #000!important;border-radius:4px!important;}
+.history-title,.history-meta{color:#000!important;}
+.history-play{
+  background:var(--neo-cyan)!important;color:#000!important;
+  border:3px solid #000!important;border-radius:5px!important;
+  box-shadow:3px 3px 0 #000!important;
+}
+
+/* PLAYER */
+.player{
+  background:var(--neo-white)!important;color:#000!important;
+  border:3px solid #000!important;border-radius:8px!important;
+  box-shadow:var(--neo-shadow)!important;
+}
+.player-cover{border:3px solid #000!important;border-radius:5px!important;}
+.player-info strong,.player-info span{color:#000!important;}
+.player-button{
+  background:#fff!important;color:#000!important;
+  border:3px solid #000!important;border-radius:5px!important;
+  box-shadow:3px 3px 0 #000!important;
+}
+.player-button.main{background:var(--neo-pink)!important;color:#000!important;}
+.progress,.volume{accent-color:#000!important;}
+
+/* BOTTOM NAV */
+.bottom-nav{
+  background:#fff!important;
+  border:3px solid #000!important;
+  border-radius:8px!important;
+  box-shadow:var(--neo-shadow)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+.nav-indicator{background:var(--neo-cyan)!important;border:3px solid #000!important;box-shadow:3px 3px 0 #000!important;}
+.nav-button{color:#000!important;z-index:2!important;}
+.nav-button i,.nav-button span{color:#000!important;}
+.nav-button.active{color:#000!important;}
+.nav-button.active i{color:#000!important;}
+
+/* MOBILE PERFORMANCE */
+@media (max-width:600px){
+  .app{padding:12px!important;}
+  .banner-media{height:190px!important;}
+  .hero-content{padding:18px 16px 22px!important;}
+  .hero h1{font-size:58px!important;}
+  .glass{box-shadow:4px 4px 0 #050505!important;}
+  .topbar{box-shadow:4px 4px 0 #050505!important;}
+  .search-card{box-shadow:4px 4px 0 #050505!important;}
+  .player{box-shadow:4px 4px 0 #050505!important;}
+  .bottom-nav{box-shadow:4px 4px 0 #050505!important;}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important;}
+}
+</style>
+
+</head>
+
+<body>
+
+<div id="toast" class="toast"></div>
+
+
+<div class="app">
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header class="topbar glass">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-headphones"></i>
+            </div>
+
+            <div class="brand-text">
+                <strong>zonXiterHub Music</strong>
+                <span>Tahap Pengembang</span>
+            </div>
+
+        </div>
+
+        <button
+            class="header-action"
+            id="clearBtn"
+            title="Clear">
+
+            <i class="fa-solid fa-broom"></i>
+
+        </button>
+
+    </header>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero glass" aria-label="ZXmusic banner">
+
+        <div class="banner-media">
+            <video
+                id="heroVideo"
+                class="hero-video"
+                autoplay
+                muted
+                loop
+                playsinline
+                webkit-playsinline
+                preload="metadata"
+                disablepictureinpicture
+                controlslist="nodownload noplaybackrate noremoteplayback">
+                <source id="heroVideoSource" src="banner/gfx1.mp4" type="video/mp4">
+            </video>
+
+            <div class="hero-video-overlay"></div>
+
+            <div class="banner-switcher" aria-label="Pilih banner video">
+                <div class="banner-switcher-title"><i class="fa-solid fa-film"></i> PILIH VIDEO banner</div>
+                <div class="banner-grid" id="bannerGrid">
+                    <button class="banner-btn active" data-banner="0" type="button">01</button>
+                    <button class="banner-btn" data-banner="1" type="button">02</button>
+                    <button class="banner-btn" data-banner="2" type="button">03</button>
+                    <button class="banner-btn" data-banner="3" type="button">04</button>
+                    <button class="banner-btn" data-banner="4" type="button">05</button>
+                    <button class="banner-btn" data-banner="5" type="button">06</button>
+                    <button class="banner-btn" data-banner="6" type="button">07</button>
+                    <button class="banner-btn" data-banner="7" type="button">08</button>
+                    <button class="banner-btn" data-banner="8" type="button">09</button>
+                    <button class="banner-btn" data-banner="9" type="button">10</button>
+                </div>
+            </div>
+
+            <div class="banner-label" id="bannerLabel">@zonXiter 1</div>
+
+            <div class="banner-fallback" id="bannerFallback">
+                <i class="fa-solid fa-film"></i>
+                <strong>banner video belum tampil</strong>
+                <span>Pastikan folder <b>banner</b> berisi gfx1.mp4 sampai gfx10.mp4.</span>
+            </div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="live-dot"></span>
+                ZXmusic • DIGITAL PLAYER
+            </div>
+
+            <h1>
+                Find your
+                <br>
+                <span class="gradient">music.</span>
+            </h1>
+
+            <p>
+                Cari lagu favorit melalui ZXmusic dengan tampilan baru,
+                 koleksi riwayat musik yang tersimpan otomatis.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SEARCH
+    ========================== -->
+
+    <div class="search-card glass">
+
+        <input
+            id="searchInput"
+            class="search-input"
+            type="search"
+            autocomplete="off"
+            placeholder="Cari judul lagu atau artis...">
+
+        <button
+            id="searchBtn"
+            class="search-button">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         RESULTS
+    ========================== -->
+
+    <div class="section-head">
+
+        <h2>
+            Hasil pencarian
+        </h2>
+
+        <span id="resultCount">
+            0 lagu
+        </span>
+
+    </div>
+
+
+    <div
+        id="results"
+        class="results">
+
+        <div class="empty glass">
+
+            <div class="empty-icon">
+                <i class="fa-solid fa-music"></i>
+            </div>
+
+            <strong>
+                Belum ada pencarian
+            </strong>
+
+            <span>
+                Ketik judul lagu untuk mulai mencari.
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- =========================
+         MUSIC HISTORY
+    ========================== -->
+
+    <section class="history-section">
+
+        <div class="section-head">
+            <h2>
+                <i class="fa-solid fa-clock-rotate-left" style="color:var(--accent);margin-right:6px"></i>
+                Riwayat Music
+            </h2>
+
+            <div class="history-actions">
+                <span id="historyCount">0 lagu</span>
+                <button
+                    id="clearHistoryBtn"
+                    class="history-clear"
+                    type="button">
+                    Hapus
+                </button>
+            </div>
+        </div>
+
+        <div
+            id="historyList"
+            class="history-list">
+
+            <div class="history-empty glass">
+                Belum ada riwayat. Setiap lagu yang berhasil dicari akan otomatis masuk ke sini.
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- =========================
+     AUDIO
+========================= -->
+
+<audio
+    id="audio"
+    preload="metadata">
+</audio>
+
+
+<!-- =========================
+     MUSIC PLAYER
+========================= -->
+
+<div
+    id="player"
+    class="player glass"
+    style="display:none;">
+
+    <div class="player-top">
+
+        <img
+            id="playerCover"
+            class="player-cover"
+            src=""
+            alt="Cover">
+
+        <div class="player-info">
+
+            <strong id="playerTitle">
+                Belum ada lagu
+            </strong>
+
+            <span id="playerArtist">
+                -
+            </span>
+
+        </div>
+
+        <div class="player-controls">
+
+            <button
+                class="player-button"
+                id="prevBtn">
+
+                <i class="fa-solid fa-backward-step"></i>
+
+            </button>
+
+            <button
+                class="player-button main"
+                id="playBtn">
+
+                <i class="fa-solid fa-play"></i>
+
+            </button>
+
+            <button
+                class="player-button"
+                id="nextBtn">
+
+                <i class="fa-solid fa-forward-step"></i>
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="progress-wrap">
+
+        <input
+            id="progress"
+            class="progress"
+            type="range"
+            min="0"
+            max="100"
+            value="0">
+
+        <div class="time-row">
+
+            <span id="currentTime">
+                0:00
+            </span>
+
+            <span id="duration">
+                0:00
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="volume-row">
+
+        <i
+            id="volumeIcon"
+            class="fa-solid fa-volume-high">
+        </i>
+
+        <input
+            id="volume"
+            class="volume"
+            type="range"
+            min="0"
+            max="1"
+            step=".01"
+            value=".7">
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     BOTTOM NAV
+========================= -->
+
+<nav class="bottom-nav glass">
+
+    <div
+        id="navIndicator"
+        class="nav-indicator">
+    </div>
+
+
+    <button
+        class="nav-button active"
+        data-index="0"
+        data-action="home">
+
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+
+    </button>
+
+
+    <button
+        class="nav-button"
+        data-index="1"
+        data-action="search">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <span>Search</span>
+
+    </button>
+
+
+    <button
+        class="nav-button"
+        data-index="2"
+        data-action="player">
+
+        <i class="fa-solid fa-compact-disc"></i>
+        <span>Player</span>
+
+    </button>
+
+
+    <button
+        class="nav-button"
+        data-index="3"
+        data-action="history">
+
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <span>Riwayat</span>
+
+    </button>
+
+
+    <button
+        class="nav-button"
+        data-index="4"
+        data-action="theme">
+
+        <i class="fa-solid fa-palette"></i>
+        <span>Theme</span>
+
+    </button>
+
+</nav>
+
+
+<script>
+
+/* =========================================================
+   MUSIC APP
+========================================================= */
+
+
+/* =========================
+   API CONFIG
+========================= */
+
+const API_URL =
+    "https://api-faa.my.id/faa/ytplay?query=";
+
+
+/* =========================
+   DOM
+========================= */
+
+const audio =
+    document.getElementById("audio");
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const searchBtn =
+    document.getElementById("searchBtn");
+
+const results =
+    document.getElementById("results");
+
+const resultCount =
+    document.getElementById("resultCount");
+
+const player =
+    document.getElementById("player");
+
+const playerCover =
+    document.getElementById("playerCover");
+
+const playerTitle =
+    document.getElementById("playerTitle");
+
+const playerArtist =
+    document.getElementById("playerArtist");
+
+const playBtn =
+    document.getElementById("playBtn");
+
+const prevBtn =
+    document.getElementById("prevBtn");
+
+const nextBtn =
+    document.getElementById("nextBtn");
+
+const progress =
+    document.getElementById("progress");
+
+const volume =
+    document.getElementById("volume");
+
+const currentTime =
+    document.getElementById("currentTime");
+
+const duration =
+    document.getElementById("duration");
+
+const volumeIcon =
+    document.getElementById("volumeIcon");
+
+const toast =
+    document.getElementById("toast");
+
+const navIndicator =
+    document.getElementById("navIndicator");
+
+// Aktifkan mode ringan otomatis pada HP/WebView dengan resource terbatas.
+(() => {
+    const memory = Number(navigator.deviceMemory || 8);
+    const cores = Number(navigator.hardwareConcurrency || 8);
+    const saveData = Boolean(navigator.connection && navigator.connection.saveData);
+    const mobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+
+    if (saveData || (mobile && (memory <= 4 || cores <= 4))) {
+        document.documentElement.classList.add("lite-mode");
+    }
+})();
+
+const heroVideo =
+    document.getElementById("heroVideo");
+
+// =========================
+// AUTO-PLAY VIDEO banner
+// =========================
+// banner pertama harus langsung dicoba saat halaman dibuka.
+// Video dibuat muted agar sesuai dengan aturan autoplay browser/WebView.
+heroVideo.muted = true;
+heroVideo.defaultMuted = true;
+heroVideo.volume = 0;
+heroVideo.setAttribute("muted", "");
+heroVideo.setAttribute("autoplay", "");
+heroVideo.setAttribute("playsinline", "");
+heroVideo.setAttribute("webkit-playsinline", "");
+
+const bannerSource = document.getElementById("heroVideoSource");
+
+function tryPlaybanner() {
+    if (!heroVideo) return;
+
+    heroVideo.muted = true;
+    heroVideo.defaultMuted = true;
+    heroVideo.volume = 0;
+
+    const result = heroVideo.play();
+
+    if (result && typeof result.catch === "function") {
+        result.catch(() => {
+            // WebView tertentu menolak autoplay pada percobaan pertama.
+            // Retry otomatis tanpa membutuhkan tombol banner.
+            setTimeout(() => {
+                heroVideo.muted = true;
+                heroVideo.play().catch(() => {});
+            }, 350);
+        });
+    }
+}
+
+function loadInitialbanner() {
+    const firstbanner = "gfx1.mp4";
+
+    heroVideo.pause();
+
+    if (bannerSource) {
+        bannerSource.src = firstbanner;
+    }
+
+    heroVideo.src = firstbanner;
+    heroVideo.load();
+
+    // Beberapa Android WebView baru mengizinkan play setelah metadata/canplay.
+    tryPlaybanner();
+    setTimeout(tryPlaybanner, 100);
+    setTimeout(tryPlaybanner, 500);
+    setTimeout(tryPlaybanner, 1200);
+}
+
+heroVideo.addEventListener("loadedmetadata", tryPlaybanner);
+heroVideo.addEventListener("loadeddata", tryPlaybanner);
+heroVideo.addEventListener("canplay", tryPlaybanner);
+heroVideo.addEventListener("canplaythrough", tryPlaybanner);
+
+document.addEventListener("DOMContentLoaded", loadInitialbanner, { once: true });
+window.addEventListener("load", loadInitialbanner, { once: true });
+window.addEventListener("pageshow", tryPlaybanner);
+
+document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) tryPlaybanner();
+});
+
+// Jika video terlihat kembali setelah scroll/tab, coba putar lagi.
+if ("IntersectionObserver" in window) {
+    const bannerObserver = new IntersectionObserver(entries => {
+        const entry = entries[0];
+        if (!entry) return;
+
+        if (entry.isIntersecting) {
+            tryPlaybanner();
+        } else {
+            // Saat banner tidak terlihat, hentikan decoding video agar scroll lebih ringan.
+            heroVideo.pause();
+        }
+    }, { threshold: 0.15 });
+
+    bannerObserver.observe(heroVideo);
+}
+
+heroVideo.addEventListener("error", () => {
+    document.querySelector(".hero")?.classList.add("banner-error");
+});
+
+heroVideo.addEventListener("loadeddata", () => {
+    document.querySelector(".hero")?.classList.remove("banner-error");
+});
+
+const bannerLabel =
+    document.getElementById("bannerLabel");
+
+const bannerButtons =
+    document.querySelectorAll(".banner-btn");
+
+const historyList =
+    document.getElementById("historyList");
+
+const historyCount =
+    document.getElementById("historyCount");
+
+const clearHistoryBtn =
+    document.getElementById("clearHistoryBtn");
+
+
+/* =========================
+   STATE
+========================= */
+
+let playlist = [];
+
+let currentIndex = -1;
+
+let searchTimeout = null;
+
+let toastTimeout = null;
+
+const HISTORY_KEY = "zxmusic_history_v2";
+const MAX_HISTORY = 30;
+
+let musicHistory = loadHistory();
+let bannerIndex = 0;
+
+
+/* =========================
+   DEFAULT VOLUME
+========================= */
+
+audio.volume = 0.7;
+
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(message) {
+
+    clearTimeout(toastTimeout);
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    toastTimeout = setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 2200);
+}
+
+
+/* =========================
+   banner SWITCHER — banner/gfx1.mp4 ... banner/gfx10.mp4
+========================= */
+
+/* =========================
+   banner SWITCHER
+========================= */
+
+const bannerS = Array.from({length: 10}, (_, i) => ({
+    url: `banner/gfx${i + 1}.mp4`,
+    label: `@zonXiter ${i + 1}`
+}));
+
+function setbanner(index) {
+    const safeIndex = Math.max(0, Math.min(bannerS.length - 1, Number(index) || 0));
+    bannerIndex = safeIndex;
+
+    const banner = bannerS[bannerIndex];
+
+    // Source video langsung dari folder banner/.
+    if (bannerSource) {
+        bannerSource.src = banner.url;
+    }
+
+    heroVideo.muted = true;
+    heroVideo.volume = 0;
+    heroVideo.src = banner.url;
+    heroVideo.load();
+
+    // Switch banner juga langsung mencoba autoplay tanpa klik tambahan.
+    tryPlaybanner();
+    setTimeout(tryPlaybanner, 100);
+    setTimeout(tryPlaybanner, 500);
+
+    bannerLabel.textContent = banner.label;
+
+    bannerButtons.forEach((button, buttonIndex) => {
+        button.classList.toggle(
+            "active",
+            buttonIndex === bannerIndex
+        );
+    });
+
+    localStorage.setItem(
+        "zxmusic_banner_index",
+        String(bannerIndex)
+    );
+}
+
+bannerButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        setbanner(Number(button.dataset.banner));
+    });
+});
+
+
+/* =========================
+   MUSIC HISTORY
+========================= */
+
+function loadHistory() {
+    try {
+        const stored = JSON.parse(
+            localStorage.getItem(HISTORY_KEY) || "[]"
+        );
+
+        return Array.isArray(stored) ? stored : [];
+    } catch {
+        return [];
+    }
+}
+
+function saveHistory(item) {
+    if (!item || !item.title) return;
+
+    const normalized = {
+        title: item.title || "Unknown Title",
+        author: item.author || "Unknown Artist",
+        thumbnail: item.thumbnail || "",
+        mp3: item.mp3 || "",
+        duration_timestamp: item.duration_timestamp || "Unknown"
+    };
+
+    const identity =
+        normalized.mp3 ||
+        `${normalized.title}::${normalized.author}`;
+
+    musicHistory = [
+        normalized,
+        ...musicHistory.filter(existing => {
+            const existingIdentity =
+                existing.mp3 ||
+                `${existing.title}::${existing.author}`;
+
+            return existingIdentity !== identity;
+        })
+    ].slice(0, MAX_HISTORY);
+
+    localStorage.setItem(
+        HISTORY_KEY,
+        JSON.stringify(musicHistory)
+    );
+
+    renderHistory();
+}
+
+function renderHistory() {
+    historyCount.textContent =
+        `${musicHistory.length} lagu`;
+
+    historyList.innerHTML = "";
+
+    if (!musicHistory.length) {
+        historyList.innerHTML = `
+            <div class="history-empty glass">
+                Belum ada riwayat. Setiap lagu yang berhasil dicari akan otomatis masuk ke sini.
+            </div>
+        `;
+        return;
+    }
+
+    musicHistory.forEach((item, index) => {
+        const card = document.createElement("div");
+        card.className = "history-card glass";
+
+        card.innerHTML = `
+            <img
+                class="history-thumb"
+                src="${escapeHTML(item.thumbnail || "")}"
+                alt="Cover"
+                loading="lazy"
+                onerror="this.style.opacity='.25'">
+
+            <div class="history-info">
+                <span class="history-title">
+                    ${escapeHTML(item.title || "Unknown Title")}
+                </span>
+
+                <span class="history-meta">
+                    ${escapeHTML(item.author || "Unknown Artist")}
+                    •
+                    ${escapeHTML(item.duration_timestamp || "Unknown")}
+                </span>
+            </div>
+
+            <button
+                class="history-play"
+                type="button"
+                aria-label="Putar ${escapeHTML(item.title || "lagu")}">
+                <i class="fa-solid fa-play"></i>
+            </button>
+        `;
+
+        card.querySelector(".history-play")
+            .addEventListener("click", () => {
+                playlist = [item];
+                currentIndex = -1;
+                playSong(0);
+            });
+
+        historyList.appendChild(card);
+    });
+}
+
+function clearHistory() {
+    musicHistory = [];
+
+    localStorage.removeItem(HISTORY_KEY);
+
+    renderHistory();
+
+    showToast("Riwayat music dihapus 🗑️");
+}
+
+clearHistoryBtn.addEventListener(
+    "click",
+    clearHistory
+);
+
+
+/* =========================
+   FORMAT TIME
+========================= */
+
+function formatTime(seconds) {
+
+    if (!Number.isFinite(seconds)) {
+        return "0:00";
+    }
+
+    const minutes =
+        Math.floor(seconds / 60);
+
+    const secs =
+        Math.floor(seconds % 60)
+        .toString()
+        .padStart(2, "0");
+
+    return `${minutes}:${secs}`;
+}
+
+
+/* =========================
+   SEARCH lagu
+========================= */
+
+async function searchMusic() {
+
+    const query =
+        searchInput.value.trim();
+
+    if (!query) {
+
+        showToast(
+            "Masukkan judul lagu terlebih dahulu."
+        );
+
+        searchInput.focus();
+
+        return;
+    }
+
+
+    searchBtn.innerHTML =
+        `<span class="loader"></span>`;
+
+    results.innerHTML = `
+        <div class="empty glass">
+            <span class="loader"></span>
+            <strong style="margin-top:12px">
+                Mencari lagu...
+            </strong>
+            <span>
+                Proses Pencarian Digital succes <
+            </span>
+        </div>
+    `;
+
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL +
+                encodeURIComponent(query)
+            );
+
+
+        if (!response.ok) {
+            throw new Error(
+                "HTTP " + response.status
+            );
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !data ||
+            !data.status ||
+            !data.result
+        ) {
+
+            throw new Error(
+                "Data lagu tidak ditemukan"
+            );
+
+        }
+
+
+        const item =
+            data.result;
+
+
+        playlist = [item];
+
+        currentIndex = -1;
+
+        // Simpan otomatis hasil pencarian ke koleksi riwayat.
+        saveHistory(item);
+
+        renderResults(
+            playlist
+        );
+
+        showToast(
+            "Lagu ditemukan & masuk riwayat 🎵"
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Music API Error:",
+            error
+        );
+
+
+        playlist = [];
+
+        currentIndex = -1;
+
+
+        results.innerHTML = `
+            <div class="empty glass">
+
+                <div class="empty-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+
+                <strong>
+                    Gagal mengambil lagu
+                </strong>
+
+                <span>
+                    API tidak merespons atau
+                    lagu tidak ditemukan.
+                </span>
+
+            </div>
+        `;
+
+
+        resultCount.textContent =
+            "0 lagu";
+
+
+        showToast(
+            "Koneksi API gagal ❌"
+        );
+
+    } finally {
+
+        searchBtn.innerHTML =
+            `<i class="fa-solid fa-magnifying-glass"></i>`;
+
+    }
+
+}
+
+
+/* =========================
+   RENDER RESULTS
+========================= */
+
+function renderResults(items) {
+
+    results.innerHTML = "";
+
+    resultCount.textContent =
+        `${items.length} lagu`;
+
+
+    if (!items.length) {
+
+        results.innerHTML = `
+            <div class="empty glass">
+
+                <div class="empty-icon">
+                    <i class="fa-solid fa-music"></i>
+                </div>
+
+                <strong>
+                    Tidak ada hasil
+                </strong>
+
+                <span>
+                    Coba kata kunci lain.
+                </span>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    items.forEach(
+        (item, index) => {
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "result glass";
+
+
+            const thumbnail =
+                item.thumbnail ||
+                "";
+
+
+            const title =
+                item.title ||
+                "Unknown Title";
+
+
+            const author =
+                item.author ||
+                "Unknown Artist";
+
+
+            const durationText =
+                item.duration_timestamp ||
+                "Unknown";
+
+
+            card.innerHTML = `
+
+                <img
+                    class="thumb"
+                    src="${escapeHTML(thumbnail)}"
+                    alt="Cover"
+                    loading="lazy"
+                    onerror="
+                        this.style.display='none'
+                    "
+                >
+
+                <div class="result-info">
+
+                    <span class="result-title">
+                        ${escapeHTML(title)}
+                    </span>
+
+                    <span class="result-meta">
+                        ${escapeHTML(author)}
+                        •
+                        ${escapeHTML(durationText)}
+                    </span>
+
+                </div>
+
+                <div class="result-play">
+
+                    <i class="fa-solid fa-play"></i>
+
+                </div>
+
+            `;
+
+
+            card.addEventListener(
+                "click",
+                () => {
+
+                    playSong(
+                        index
+                    );
+
+                }
+            );
+
+
+            results.appendChild(card);
+
+        }
+    );
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+}
+
+
+/* =========================
+   PLAY SONG
+========================= */
+
+function playSong(index) {
+
+    if (
+        index < 0 ||
+        index >= playlist.length
+    ) {
+
+        showToast(
+            "Lagu tidak tersedia."
+        );
+
+        return;
+    }
+
+
+    const item =
+        playlist[index];
+
+
+    if (!item.mp3) {
+
+        showToast(
+            "URL audio tidak tersedia."
+        );
+
+        return;
+    }
+
+
+    currentIndex =
+        index;
+
+
+    playerCover.src =
+        item.thumbnail || "";
+
+
+    playerTitle.textContent =
+        item.title ||
+        "Unknown Title";
+
+
+    playerArtist.textContent =
+        item.author ||
+        "Unknown Artist";
+
+
+    audio.src =
+        item.mp3;
+
+
+    audio.load();
+
+
+    player.style.display =
+        "block";
+
+
+    audio.play()
+        .then(() => {
+
+            updatePlayIcon();
+
+            showToast(
+                "Memutar • " +
+                (item.title || "Music")
+            );
+
+        })
+        .catch(() => {
+
+            updatePlayIcon();
+
+            showToast(
+                "Tekan tombol play untuk memulai."
+            );
+
+        });
+
+
+    scrollPlayerIntoView();
+
+}
+
+
+/* =========================
+   PLAY / PAUSE
+========================= */
+
+function togglePlayback() {
+
+    if (!audio.src) {
+
+        showToast(
+            "Pilih lagu terlebih dahulu."
+        );
+
+        return;
+    }
+
+
+    if (audio.paused) {
+
+        audio.play();
+
+    } else {
+
+        audio.pause();
+
+    }
+
+}
+
+
+/* =========================
+   PLAY ICON
+========================= */
+
+function updatePlayIcon() {
+
+    if (audio.paused) {
+
+        playBtn.innerHTML =
+            `<i class="fa-solid fa-play"></i>`;
+
+    } else {
+
+        playBtn.innerHTML =
+            `<i class="fa-solid fa-pause"></i>`;
+
+    }
+
+}
+
+
+/* =========================
+   NEXT
+========================= */
+
+function nextSong() {
+
+    if (!playlist.length) {
+
+        showToast(
+            "Playlist masih kosong."
+        );
+
+        return;
+    }
+
+
+    let next =
+        currentIndex + 1;
+
+
+    if (next >= playlist.length) {
+        next = 0;
+    }
+
+
+    playSong(next);
+
+}
+
+
+/* =========================
+   PREVIOUS
+========================= */
+
+function previousSong() {
+
+    if (!playlist.length) {
+
+        showToast(
+            "Playlist masih kosong."
+        );
+
+        return;
+    }
+
+
+    let previous =
+        currentIndex - 1;
+
+
+    if (previous < 0) {
+
+        previous =
+            playlist.length - 1;
+
+    }
+
+
+    playSong(previous);
+
+}
+
+
+/* =========================
+   AUDIO EVENTS
+========================= */
+
+audio.addEventListener(
+    "play",
+    updatePlayIcon
+);
+
+
+audio.addEventListener(
+    "pause",
+    updatePlayIcon
+);
+
+
+audio.addEventListener(
+    "timeupdate",
+    () => {
+
+        if (!audio.duration) {
+            return;
+        }
+
+
+        const percent =
+            (audio.currentTime /
+                audio.duration) * 100;
+
+
+        progress.value =
+            percent;
+
+
+        currentTime.textContent =
+            formatTime(
+                audio.currentTime
+            );
+
+    }
+);
+
+
+audio.addEventListener(
+    "loadedmetadata",
+    () => {
+
+        duration.textContent =
+            formatTime(
+                audio.duration
+            );
+
+    }
+);
+
+
+audio.addEventListener(
+    "ended",
+    () => {
+
+        if (playlist.length > 1) {
+
+            nextSong();
+
+        } else {
+
+            updatePlayIcon();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+progress.addEventListener(
+    "input",
+    () => {
+
+        if (!audio.duration) {
+            return;
+        }
+
+
+        audio.currentTime =
+            (progress.value / 100) *
+            audio.duration;
+
+    }
+);
+
+
+/* =========================
+   VOLUME
+========================= */
+
+volume.addEventListener(
+    "input",
+    () => {
+
+        audio.volume =
+            Number(volume.value);
+
+
+        updateVolumeIcon();
+
+    }
+);
+
+
+function updateVolumeIcon() {
+
+    const value =
+        Number(volume.value);
+
+
+    if (value === 0) {
+
+        volumeIcon.className =
+            "fa-solid fa-volume-xmark";
+
+    } else if (value < .5) {
+
+        volumeIcon.className =
+            "fa-solid fa-volume-low";
+
+    } else {
+
+        volumeIcon.className =
+            "fa-solid fa-volume-high";
+
+    }
+
+}
+
+
+/* =========================
+   BUTTON EVENTS
+========================= */
+
+playBtn.addEventListener(
+    "click",
+    togglePlayback
+);
+
+
+nextBtn.addEventListener(
+    "click",
+    nextSong
+);
+
+
+prevBtn.addEventListener(
+    "click",
+    previousSong
+);
+
+
+searchBtn.addEventListener(
+    "click",
+    searchMusic
+);
+
+
+searchInput.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Enter"
+        ) {
+
+            searchMusic();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   SEARCH DEBOUNCE
+========================= */
+
+searchInput.addEventListener(
+    "input",
+    () => {
+
+        clearTimeout(
+            searchTimeout
+        );
+
+
+        if (
+            searchInput.value.trim().length < 2
+        ) {
+            return;
+        }
+
+
+        searchTimeout =
+            setTimeout(
+                () => {
+
+                    /*
+                     * Tidak otomatis memanggil API.
+                     * User tetap menekan Search/Enter.
+                     */
+
+                },
+                500
+            );
+
+    }
+);
+
+
+/* =========================
+   CLEAR
+========================= */
+
+document
+    .getElementById("clearBtn")
+    .addEventListener(
+        "click",
+        () => {
+
+            searchInput.value = "";
+
+            playlist = [];
+
+            currentIndex = -1;
+
+            results.innerHTML = `
+
+                <div class="empty glass">
+
+                    <div class="empty-icon">
+                        <i class="fa-solid fa-music"></i>
+                    </div>
+
+                    <strong>
+                        Belum ada pencarian
+                    </strong>
+
+                    <span>
+                        Ketik judul lagu untuk mulai mencari.
+                    </span>
+
+                </div>
+
+            `;
+
+            resultCount.textContent =
+                "0 lagu";
+
+
+            showToast(
+                "Hasil pencarian dibersihkan."
+            );
+
+        }
+    );
+
+
+/* =========================
+   PLAYER SCROLL
+========================= */
+
+function scrollPlayerIntoView() {
+
+    if (
+        window.innerWidth < 700
+    ) {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+}
+
+
+/* =========================
+   BOTTOM NAV
+========================= */
+
+const navButtons =
+    document.querySelectorAll(
+        ".nav-button"
+    );
+
+
+function moveNavIndicator(index) {
+
+    navIndicator.style.transform =
+        `translateX(
+            calc(${index} * (100% + 4px))
+        )`;
+
+}
+
+
+navButtons.forEach(
+    button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const index =
+                    Number(
+                        button.dataset.index
+                    );
+
+
+                navButtons.forEach(
+                    item =>
+                        item.classList
+                            .remove("active")
+                );
+
+
+                button.classList
+                    .add("active");
+
+
+                moveNavIndicator(index);
+
+
+                const action =
+                    button.dataset.action;
+
+
+                if (
+                    action === "home"
+                ) {
+
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "smooth"
+                    });
+
+                }
+
+
+                if (
+                    action === "search"
+                ) {
+
+                    searchInput.focus();
+
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "smooth"
+                    });
+
+                }
+
+
+                if (
+                    action === "player"
+                ) {
+
+                    if (
+                        player.style.display !==
+                        "none"
+                    ) {
+
+                        player.scrollIntoView({
+                            behavior: "smooth",
+                            block: "center"
+                        });
+
+                    } else {
+
+                        showToast(
+                            "Belum ada lagu yang diputar."
+                        );
+
+                    }
+
+                }
+
+
+                if (
+                    action === "history"
+                ) {
+
+                    document
+                        .querySelector(".history-section")
+                        .scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+                }
+
+
+                if (
+                    action === "theme"
+                ) {
+
+                    cycleTheme();
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================
+   THEME COLORS
+========================= */
+
+const themes = [
+
+    {
+        accent: "#a855f7",
+        accent2: "#6366f1",
+        rgb: "168, 85, 247"
+    },
+
+    {
+        accent: "#06b6d4",
+        accent2: "#3b82f6",
+        rgb: "6, 182, 212"
+    },
+
+    {
+        accent: "#ec4899",
+        accent2: "#f43f5e",
+        rgb: "236, 72, 153"
+    },
+
+    {
+        accent: "#22c55e",
+        accent2: "#14b8a6",
+        rgb: "34, 197, 94"
+    },
+
+    {
+        accent: "#f59e0b",
+        accent2: "#ef4444",
+        rgb: "245, 158, 11"
+    }
+
+];
+
+
+let themeIndex = 0;
+
+
+function cycleTheme() {
+
+    themeIndex++;
+
+    if (
+        themeIndex >=
+        themes.length
+    ) {
+
+        themeIndex = 0;
+
+    }
+
+
+    const theme =
+        themes[themeIndex];
+
+
+    document.documentElement
+        .style
+        .setProperty(
+            "--accent",
+            theme.accent
+        );
+
+
+    document.documentElement
+        .style
+        .setProperty(
+            "--accent-2",
+            theme.accent2
+        );
+
+
+    document.documentElement
+        .style
+        .setProperty(
+            "--accent-rgb",
+            theme.rgb
+        );
+
+
+    showToast(
+        "Tema icon di ubah ✨"
+    );
+
+}
+
+
+/* =========================
+   KEYBOARD SHORTCUTS
+========================= */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.code === "Space" &&
+            document.activeElement !==
+            searchInput
+        ) {
+
+            event.preventDefault();
+
+            togglePlayback();
+
+        }
+
+
+        if (
+            event.key === "ArrowRight"
+        ) {
+
+            nextSong();
+
+        }
+
+
+        if (
+            event.key === "ArrowLeft"
+        ) {
+
+            previousSong();
+
+        }
+
+    }
+);
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+const savedbanner =
+    Number(localStorage.getItem("zxmusic_banner_index"));
+
+if (Number.isInteger(savedbanner) && savedbanner >= 0 && savedbanner < bannerS.length) {
+    setbanner(savedbanner);
+} else {
+    setbanner(0);
+}
+
+// Jangan menunggu tombol banner: langsung jalankan banner tersimpan/default.
+setTimeout(tryPlaybanner, 50);
+setTimeout(tryPlaybanner, 300);
+setTimeout(tryPlaybanner, 1000);
+
+renderHistory();
+
+moveNavIndicator(0);
+
+updateVolumeIcon();
+
+console.log(
+    "zonXiter Music + History initialized."
+);
+
+</script>
+
+</body>
+</html>
