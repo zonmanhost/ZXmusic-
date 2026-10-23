@@ -3086,10 +3086,36 @@ body { transition: background-color .2s ease, color .2s ease; }
     <!-- MORE / SETTINGS PAGE -->
     <main class="page" id="page-more" data-page="more">
         <div class="page-head"><div><h1>More</h1><p>Pengaturan tampilan dan kontak owner ZXmusic.</p></div><span class="page-head-badge">SETTINGS</span></div>
-        <section class="settings-card glass zx-offline-card" aria-label="ZXmusic Offline Mode">
+        <style id="zxmusic-feature-menu-styles">
+            .zx-feature-menu{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 18px}
+            .zx-feature-tile{position:relative;overflow:hidden;min-width:0;padding:16px;border:1px solid var(--border);border-radius:18px;background:var(--glass);box-shadow:var(--shadow,0 8px 24px #0002)}
+            .zx-feature-tile:before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--feature-accent,var(--accent))}
+            .zx-feature-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;background:var(--glass-hover);font-size:20px;margin-bottom:12px}
+            .zx-feature-tile h2{font-size:15px;line-height:1.25;margin:0 0 7px;font-weight:900}
+            .zx-feature-tile p{font-size:11px;line-height:1.55;color:var(--muted);margin:0 0 14px}
+            .zx-feature-tile button{width:100%;border:0;border-radius:12px;padding:11px 9px;background:var(--feature-accent,var(--accent));color:#fff;font-weight:800;font-size:11px;cursor:pointer}
+            .zx-feature-download{--feature-accent:#7c5cff}.zx-feature-offline{--feature-accent:#12a889}
+            .zx-offline-card .settings-row{align-items:center}
+            @media(max-width:420px){.zx-feature-menu{grid-template-columns:1fr}.zx-feature-tile{padding:14px}.zx-feature-tile p{max-width:38ch}}
+        </style>
+        <section class="zx-feature-menu" aria-label="Fitur Download Music dan Offline Mode">
+            <article class="zx-feature-tile zx-feature-download">
+                <div class="zx-feature-icon" aria-hidden="true"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+                <h2>⬇️ Download Music</h2>
+                <p>Unduh lagu favorit saat terhubung ke internet. Gunakan tombol download pada hasil pencarian untuk menyimpannya di browser ini.</p>
+                <button type="button" id="zxGoDownload"><i class="fa-solid fa-magnifying-glass"></i> Cari & Download Lagu</button>
+            </article>
+            <article class="zx-feature-tile zx-feature-offline">
+                <div class="zx-feature-icon" aria-hidden="true"><i class="fa-solid fa-wifi"></i></div>
+                <h2>📴 Offline Mode</h2>
+                <p>Putar kembali lagu yang sudah berhasil tersimpan tanpa koneksi internet. Koleksi tersimpan di browser/perangkat ini.</p>
+                <button type="button" id="zxGoOffline"><i class="fa-solid fa-music"></i> Buka Koleksi Offline</button>
+            </article>
+        </section>
+        <section class="settings-card glass zx-offline-card" id="zxOfflineCollection" aria-label="Koleksi Offline ZXmusic">
             <div class="settings-row">
                 <div class="settings-info">
-                    <strong><i class="fa-solid fa-cloud-arrow-down"></i> ZXmusic Offline Mode</strong>
+                    <strong><i class="fa-solid fa-music"></i> Koleksi Offline</strong>
                     <span>Unduh audio saat online, lalu putar tanpa internet. Lagu disimpan di browser ini.</span>
                 </div>
                 <span class="page-head-badge" id="offlineNetworkStatus">Memeriksa...</span>
@@ -5323,6 +5349,18 @@ function showPage(pageName, updateUrl = true) {
     if (updateUrl) history.replaceState(null, "", `#${pageName}`);
     window.scrollTo({top:0, behavior:"smooth"});
 }
+
+const zxGoDownloadButton = document.getElementById("zxGoDownload");
+if (zxGoDownloadButton) zxGoDownloadButton.addEventListener("click", () => {
+    showPage("search");
+    setTimeout(() => document.getElementById("searchInput")?.focus(), 250);
+});
+const zxGoOfflineButton = document.getElementById("zxGoOffline");
+if (zxGoOfflineButton) zxGoOfflineButton.addEventListener("click", () => {
+    const collection = document.getElementById("zxOfflineCollection");
+    collection?.scrollIntoView({behavior:"smooth", block:"start"});
+    document.getElementById("offlineSongList")?.focus?.({preventScroll:true});
+});
 
 navButtons.forEach(button => {
     button.addEventListener("click", () => showPage(button.dataset.action));
